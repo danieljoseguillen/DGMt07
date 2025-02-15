@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <title>Listado de integrantes</title>
+</head>
+
+<body>
+    <nav th:replace="~{/fragments.html::menu}"></nav>
+    <h1 th:if="${tipo=='proyecto'}">Listado de integrantes de proyecto:</h1>
+    <h1 th:if="${tipo=='empleado'}">Listado de proyectos del empleado:</h1>
+    <h1><span th:text="${objeto.nombre}"></span></h1>
+<a th:if="${tipo=='proyecto'}" class="btn btn-primary btn-block" th:href="@{/proyecto/info/{id} (id=${objeto.id})}">Volver</a>
+<a th:if="${tipo=='empleado'}" class="btn btn-primary btn-block" th:href="@{/info/{id} (id=${objeto.id})}">Volver</a>
+    <table class="table">
+        <thead>
+            <th th:if="${tipo=='proyecto'}">Empleado</th>
+            <th th:if="${tipo=='empleado'}">Proyecto</th>
+            <th>Puesto</th>
+            <th>Borrar</th>
+        </thead>
+        <tbody>
+            <tr th:each="integ:${integrantes}">
+                <td th:if="${tipo=='proyecto'}" th:text="${integ.empleado.nombre}"></td>
+                <td th:if="${tipo=='empleado'}" th:text="${integ.proyecto.nombre}"></td>
+                <td th:text="${integ.puesto}"></td>
+                <td><a class="btn btn-danger btn-block" th:href="@{/integrantes/delete/{tipo}/{val}/{id}(tipo=${tipo},val=${objeto.id},id=${integ.id})}">Borrar</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div th:if="${error!=null}">
+        <p class="alert alert-danger" th:text="${error}"></p>
+    </div>
+</body>
+
+</html>

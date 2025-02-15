@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <title>Listado de nominas</title>
+</head>
+
+<body>
+    <nav th:replace="~{/fragments.html::menu}"></nav>
+    <h1>Listado de nominas</h1>
+    <a class="btn btn-primary btn-success" th:href="@{/nomina/add}">Agregar Nomina</a>
+    <table class="table">
+        <thead>
+            <th>ID</th>
+            <th>Empleado</th>
+            <th>Fecha</th>
+            <th>Importe bruto</th>
+            <th>% Comisión</th>
+            <th>Importe neto</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </thead>
+        <tbody>
+            <tr th:each="nomina:${nominas}">
+                <td><a th:href="@{/nomina/info/{id} (id=${nomina.id})}" th:text="${nomina.id}"></a></td>
+                <td><a th:href="@{/info/{id} (id=${nomina.empleado.id})}" th:text="${nomina.empleado.nombre}"></a></td>
+                <td th:text="${nomina.fechaNomina}"></td>
+                <td th:text="${nomina.importeBruto}"></td>
+                <td th:text="${nomina.porcentImpuestos}"></td>
+                <td th:text="${nomina.importeNeto}"></td>
+                <td><a class="btn btn-primary btn-block" th:href="@{/nomina/edit/{id}(id=${nomina.id})}">Editar</a></td>
+                <td><a class="btn btn-danger btn-block" th:href="@{/nomina/delete/{id}(id=${nomina.id})}">Borrar</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div th:if="${error!=null}">
+        <p class="alert alert-danger" th:text="${error}"></p>
+    </div>
+</body>
+
+</html>

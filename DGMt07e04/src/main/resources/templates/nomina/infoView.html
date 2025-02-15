@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <title>Datos del nomina</title>
+</head>
+<body>
+    <nav th:replace="~{/fragments.html::menu}"></nav>
+    <h1>Datos de nomina</h1>
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td th:text="*{nomina.id}"></td>
+        </tr>
+        <tr>
+            <td>Fecha</td>
+            <td th:text="*{nomina.fechaNomina}"></td>
+        </tr>
+        <tr>
+            <td>Importe bruto</td>
+            <td th:text="*{nomina.importeBruto}"></td>
+        </tr>
+        <tr>
+            <td>Porcentaje de impuesto</td>
+            <td th:text="*{nomina.porcentImpuestos}"></td>
+        </tr>
+        <tr>
+            <td>Importe neto</td>
+            <td th:text="*{nomina.importeNeto}"></td>
+        </tr>
+    </table>
+    <a class="btn btn-primary btn-block" th:href="@{/nomina/edit/{id}(id=${nomina.id})}">Editar</a>
+    <a class="btn btn-danger btn-block" th:href="@{/nomina/delete/{id}(id=${nomina.id})}">Borrar</a> <a class="btn btn-primary btn-block" th:href="@{/nomina/}">Volver</a>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <title>Edición de nomina</title>
+</head>
+<body>
+    <nav th:replace="~{/fragments.html::menu}"></nav>
+    <h1>Edición de nomina</h1>
+    <form method="post" action="#" th:action="@{/nomina/edit/submit}" th:object="${nomForm}">
+        <table class="table">
+            <tr>
+                <td>ID</td>
+                <td><input type="number" readonly id="disabledInput" th:field="*{id}"></td>
+            </tr>
+            <tr>
+                <td>Fecha de Nómina</td>
+                <td><input type="date" th:field="*{fechaNomina}" required></td>
+            </tr>
+            <tr>
+                <td>Empleado</td>
+                <td>
+                    <select th:field="*{empleado}" required>
+                        <option th:each="emp : ${empleados}" th:value="${emp.id}" th:text="${emp.nombre}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Importe Bruto</td>
+                <td><input type="number" step="1000" th:field="*{importeBruto}" required></td>
+            </tr>
+            <tr>
+                <td>Porcentaje de Impuestos</td>
+                <td><input type="number" step="1" th:field="*{porcentImpuestos}" required></td>
+            </tr>
+            <tr>
+                <td>Importe Neto</td>
+                <td><input type="number" step="1000" th:field="*{importeNeto}" readonly></td>
+            </tr>
+        </table>
+        <input type="submit" class="btn btn-primary btn-block" value="Confirmar">
+        <a class="btn btn-primary btn-block" th:href="@{/nomina/}">Volver</a>
+    </form>
+    <div th:if="${error!=null}">
+        <p class="alert alert-danger" th:text="${error}"></p>
+    </div>
+    <script src="/js/scriptNeto.js"></script>
+</body>
+</html>

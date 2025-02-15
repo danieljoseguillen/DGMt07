@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <title>Listado de empleados</title>
+</head>
+
+<body>
+    <h1>Listado de empleados</h1>
+    <form method="post" action="#" th:action="@{/sort}" th:object="${sortForm}">
+        <label>Nombre: </label>&nbsp;<input type="text" th:field="*{sortname}">
+        <input type="submit" value="Buscar">
+    </form><br>
+    <a class="btn btn-primary btn-block" th:href="@{/}">Reestablecer</a>
+    <table class="table">
+        <thead>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Salario</th>
+        </thead>
+        <tbody>
+            <tr th:each="empleado:${empleados}">
+                <td th:text="${empleado.id}"></td>
+                <td><a th:href="@{/info/{id} (id=${empleado.id})}" th:text="${empleado.nombre}"></a></td>
+                <td th:text="${empleado.correo}"></td>
+                <td th:text="${empleado.salario}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary btn-block" th:href="@{/?pag=0}">Página inicial</a>&nbsp;&nbsp;
+    <a class="btn btn-primary btn-block" th:href="@{/(pag=${prevPage})}">Página anterior</a>&nbsp;&nbsp;
+    <a class="btn btn-primary btn-block" th:href="@{/(pag=${nextPage})}">Página siguiente</a>&nbsp;&nbsp;
+    <a class="btn btn-primary btn-block" th:href="@{/(pag=${lastPage})}">Ultima página</a>
+    <div th:if="${error!=null}">
+        <p class="alert alert-danger" th:text="${error}"></p>
+    </div>
+</body>
+
+</html>
