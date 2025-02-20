@@ -6,7 +6,7 @@ INSERT INTO cuenta (IBAN, alias, saldo) VALUES ('ES10000000000000000003', 'Cuent
 -- Inserción de movimientos para la primera cuenta
 INSERT INTO movimiento (fecha_hora, saldo, cuenta_iban) VALUES ('2024-02-14 08:00:00', -200.00, 'ES10000000000000000001');
 INSERT INTO movimiento (fecha_hora, saldo, cuenta_iban) VALUES ('2024-02-14 10:30:00', 500.00, 'ES10000000000000000001');
-INSERT INTO movimiento (fecha_hora, saldo, cuenta_iban) VALUES ('2024-02-14 12:00:00', -100.00, 'ES10000000000000000001');
+INSERT INTO movimiento (fecha_hora, saldo, cuenta_iban) VALUES ('2024-02-14 12:00:01', -100.00, 'ES10000000000000000001');
 INSERT INTO movimiento (fecha_hora, saldo, cuenta_iban) VALUES ('2024-02-14 14:45:00', -50.00, 'ES10000000000000000001');
 INSERT INTO movimiento (fecha_hora, saldo, cuenta_iban) VALUES ('2024-02-14 16:20:00', 200.00, 'ES10000000000000000001');
 INSERT INTO movimiento (fecha_hora, saldo, cuenta_iban) VALUES ('2024-02-14 18:00:00', -300.00, 'ES10000000000000000001');

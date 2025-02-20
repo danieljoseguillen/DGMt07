@@ -46,7 +46,7 @@ public class pServiceImpl implements pService {
 
     public boolean borrarPorId(long id) {
 
-            if (repositorio.findById(id) != null) {
+            if (repositorio.findById(id).isPresent()) {
                 repositorio.deleteById(id);
                 return true;
             }

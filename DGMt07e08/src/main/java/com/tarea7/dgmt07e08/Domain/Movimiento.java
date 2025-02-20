@@ -33,7 +33,7 @@ public class Movimiento {
 
 
     @Max(value = 1000, message = "No se admiten ingresos de mas de 1000")
-    @Min(value = -3000, message = "No se admiten retiros de mas de 300")
+    @Min(value = -300, message = "No se admiten retiros de mas de 300")
     private Double saldo;
 
     @ManyToOne

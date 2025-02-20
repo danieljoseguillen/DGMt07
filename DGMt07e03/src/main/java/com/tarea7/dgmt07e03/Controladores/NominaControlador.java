@@ -58,7 +58,7 @@ public class NominaControlador {
             }
         } catch (Exception e) {
             errmsg = e.getMessage();
-            return "redirect:/nomina";
+            return "redirect:/nomina/";
         }
         return "nomina/editView";
     }

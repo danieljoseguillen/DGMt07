@@ -39,7 +39,7 @@ public class iServiceImpl implements iService {
 
     public boolean borrarPorId(long id) {
 
-        if (repositorio.findById(id) != null) {
+        if (repositorio.findById(id).isPresent()) {
             repositorio.deleteById(id);
             return true;
         }

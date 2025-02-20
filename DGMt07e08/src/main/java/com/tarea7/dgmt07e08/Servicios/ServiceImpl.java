@@ -1,5 +1,7 @@
 package com.tarea7.dgmt07e08.Servicios;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Random;
 
@@ -49,7 +51,7 @@ public class ServiceImpl implements Servicio {
     }
 
     public boolean borrarCuenta(String IBAN) {
-        if (cRepository.findById(IBAN) != null) {
+        if (cRepository.findById(IBAN).isPresent()) {
             cRepository.deleteById(IBAN);
             return true;
         }
@@ -58,10 +60,11 @@ public class ServiceImpl implements Servicio {
 
     public List<Movimiento> listAllAcountMovements(String IBAN) {
         if (IBAN==null) {
-            return mRepository.findAll();
+            return mRepository.findAllByOrderByFechaHoraDesc();
         }
-        Cuenta cuenta = cRepository.findById(IBAN).orElseThrow(() -> new RuntimeException("No se encontró la cuenta"));
-        return cuenta.getMovimientos();
+        return mRepository.findByCuentaIBANOrderByFechaHoraDesc(IBAN);
+        // Cuenta cuenta = cRepository.findById(IBAN).orElseThrow(() -> new RuntimeException("No se encontró la cuenta"));
+        // return cuenta.getMovimientos();
     }
 
     public String generadorIBAN() {
@@ -77,7 +80,8 @@ public class ServiceImpl implements Servicio {
 
     public Movimiento agregarMovimiento(Movimiento mov) {
         try {
-            // Proceso para sustraer o agregar saldo tras guardar el movimiento
+            // Proceso para agregar la fecha y sustraer o agregar saldo tras guardar el movimiento
+            mov.setFechaHora(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
             Cuenta cuenta = mov.getCuenta();
             System.out.println(cuenta.getSaldo()+mov.getSaldo());
             if (cuenta.getSaldo()+mov.getSaldo() < 0) {
@@ -88,7 +92,7 @@ public class ServiceImpl implements Servicio {
             modificarCuenta(cuenta);
             return movem;
         } catch (Exception e) {
-            throw new RuntimeException("No se pudo guardar el movimiento.");
+            throw new RuntimeException(e.getMessage());
         }
     }
 

@@ -32,16 +32,17 @@ public class dServiceImpl implements dService {
     }
 
     public boolean modificar(Departamento departamento) {
-        Departamento agr = repositorio.save(departamento);
-        if (agr == null) {
-            throw new RuntimeException("No se encontró el departamento a editar.");
+        try {
+            repositorio.save(departamento);
+        } catch (Exception e) {
+            throw new RuntimeException("No se pudo modificar el departamento.");
         }
         return true;
     }
 
     public boolean borrarPorId(long id) {
 
-            if (repositorio.findById(id) != null) {
+            if (repositorio.findById(id).isPresent()) {
                 repositorio.deleteById(id);
                 return true;
             }

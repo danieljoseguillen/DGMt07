@@ -42,10 +42,6 @@ public class eServiceImpl implements eService {
         }
     }
 
-    public List<Empleado> listGender(Genero genero) {
-        return repositorio.findByGenero(genero);
-    }
-
     public Empleado getById(long id) {
         return repositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("No se encontraron empleados con la ID indicada."));
@@ -97,16 +93,17 @@ public class eServiceImpl implements eService {
             throw new RuntimeException(
                     "El salario total de los empleados supera el presupuesto anual del departamento.");
         }
-        Empleado agr = repositorio.save(empleado);
-        if (agr == null) {
-            throw new RuntimeException("No se encontró el empleado a editar.");
+        try {
+            repositorio.save(empleado);
+        } catch (Exception e) {
+            throw new RuntimeException("No se pudo modificar el empleado.");
         }
         return true;
     }
 
     public boolean borrarPorId(long id) {
 
-        if (repositorio.findById(id) != null) {
+        if (repositorio.findById(id).isPresent()) {
             repositorio.deleteById(id);
             return true;
         }

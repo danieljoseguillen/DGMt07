@@ -35,6 +35,6 @@ public class Departamento {
 
     
     @ToString.Exclude
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento")
     private List<Empleado> empleados= new ArrayList<>();
 }

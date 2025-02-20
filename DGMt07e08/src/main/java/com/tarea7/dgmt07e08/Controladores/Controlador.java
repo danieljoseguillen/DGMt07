@@ -1,6 +1,5 @@
 package com.tarea7.dgmt07e08.Controladores;
 
-import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,8 +120,8 @@ public class Controlador {
     @PostMapping("/movements/new/submit")
     public String postNewMove(@Valid Movimiento moveForm, BindingResult bindingResult,
             Model model) {
-        // Asigna la fecha y hora actual al hacer submit
-        moveForm.setFechaHora(LocalDateTime.now());
+        // Asigna la fecha y hora actual al hacer submit (Movido a servicio)
+        // moveForm.setFechaHora(LocalDateTime.now());
         if (bindingResult.hasErrors()) {
             errmsg = bindingResult.getFieldErrors().stream()
                     .map(error -> error.getField() + ": " + error.getDefaultMessage())

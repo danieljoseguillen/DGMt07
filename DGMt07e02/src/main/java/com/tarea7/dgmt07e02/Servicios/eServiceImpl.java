@@ -46,16 +46,17 @@ public class eServiceImpl implements eService {
     }
 
     public boolean modificar(Empleado empleado) {
-        Empleado agr = repositorio.save(empleado);
-        if (agr == null) {
-            throw new RuntimeException("No se encontró el empleado a editar.");
+        try {
+            repositorio.save(empleado);
+        } catch (Exception e) {
+            throw new RuntimeException("No se pudo modificar el empleado.");
         }
         return true;
     }
 
     public boolean borrarPorId(long id) {
 
-            if (repositorio.findById(id) != null) {
+            if (repositorio.findById(id).isPresent()) {
                 repositorio.deleteById(id);
                 return true;
             }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <title>Nuevo paciente</title>
+</head>
+
+<body>
+    <h1>Consulta medica. Nuevo paciente.</h1>
+    <script th:if="${errn != null}" th:inline="javascript">
+        /*<![CDATA[*/
+        let val = /*[[${errn}]]*/ 'nan';
+            alert(val);
+        /*]]>*/
+    </script>
+    <form action="#" method="post" th:action="@{/newPatient/submit}" th:object="${newPatient}">
+        <table>
+            <tr>
+                <td>DNI: </td>
+                <td><input type="text" th:field="*{dni}" required/></td>
+            </tr>
+            <tr>
+                <td>Nombre: </td>
+                <td><input type="text" th:field="*{nombre}" required/></td>
+            </tr>
+            <tr>
+                <td>Fecha de nacimiento: </td>
+                <td><input type="date" th:field="*{fechaNacimiento}"/></td>
+            </tr>
+            <tr>
+                <td colspan="2">Motivo de la visita.</td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="tipoPaciente" value="1" th:checked="${tipoPaciente == null || tipoPaciente == 1}"> Consulta</td>
+                <td><input type="radio" th:field="*{tipoPaciente}" value="2"> Recetas</td>
+                <td><input type="radio" th:field="*{tipoPaciente}" value="3"> Revisión</td>
+            </tr>
+            <tr>
+                <td>Motivo de consulta</td>
+                <td><input type="text" th:field="*{motivo}"/></td>
+            </tr>
+            <tr>
+                <td>Medicamentos (Cantidad)</td>
+                <td><input type="number" th:field="*{medicamentos}"/></td>
+            </tr>
+            <tr>
+                <td>Fecha de ultima visita</td>
+                <td><input type="date" th:field="*{ultimaRevision}"/></td>
+            </tr>
+        </table>
+        <input type="submit" value="Agregar" class="btn btn-success btn-block">
+        <a class="btn btn-primary btn-block" th:href="@{/}">Volver</a>
+    </form>
+</body>
+
+</html>

@@ -20,6 +20,10 @@
             <td>Nombre</td>
             <td th:text="*{departamento.nombre}"></td>
         </tr>
+        <tr>
+            <td>Presupuesto anual</td>
+            <td th:text="${departamento.presupuesto}"></td>
+        </tr>
     </table>
     <a class="btn btn-primary btn-block" th:href="@{/depto/edit/{id}(id=${departamento.id})}">Editar</a>
     <a class="btn btn-danger btn-block" th:href="@{/depto/delete/{id}(id=${departamento.id})}">Borrar</a> <a class="btn btn-primary btn-block" th:href="@{/}">Volver</a>

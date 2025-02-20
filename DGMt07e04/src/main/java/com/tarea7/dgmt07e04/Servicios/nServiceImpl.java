@@ -51,7 +51,7 @@ public class nServiceImpl implements nService {
 
     public boolean borrarPorId(long id) {
 
-            if (repositorio.findById(id) != null) {
+            if (repositorio.findById(id).isPresent()) {
                 repositorio.deleteById(id);
                 return true;
             }

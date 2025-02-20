@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <title>Pagina de inicio</title>
+</head>
+
+<body>
+    <script th:if="${error != null}" th:inline="javascript">
+        /*<![CDATA[*/
+        let val = /*[[${error}]]*/ 'nan';
+            alert(val);
+        /*]]>*/
+    </script>
+    <h1>Consulta medica. Lista de espera.</h1>
+    <p class="alert alert-success" th:if="${importe} != null">Se ha procesado la factura con exito. El importe es de <span th:text="${importe}"></span> euros.</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>DNI</th>
+                <th>Nombre</th>
+                <th>Fecha de nacimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="paciente : ${listaPacientes}">
+                <td th:text="${paciente.dni}"></td>
+                <td th:text="${paciente.nombre}"></td>
+                <td th:text="${paciente.fechaNacimiento}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary btn-block" th:href="@{/newPatient}">Nuevo paciente</a>
+    <a class="btn btn-primary btn-block" th:href="@{/nextPatient}">Llamar a consulta</a>
+</body>
+
+</html>

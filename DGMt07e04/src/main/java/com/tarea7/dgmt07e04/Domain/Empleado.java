@@ -61,7 +61,7 @@ public class Empleado {
     private Departamento departamento;
 
     @ToString.Exclude
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado")
     private List<Nomina> nominas = new ArrayList<>();
 
     @ToString.Exclude

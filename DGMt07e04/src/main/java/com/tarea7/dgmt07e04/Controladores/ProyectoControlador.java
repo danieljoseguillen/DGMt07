@@ -55,7 +55,7 @@ public class ProyectoControlador {
             }
         } catch (Exception e) {
             errmsg = e.getMessage();
-            return "redirect:/proyecto";
+            return "redirect:/proyecto/";
         }
         return "proyecto/editView";
     }
